@@ -74,9 +74,25 @@ make deploy
 Deploy Proemtheus
 
 ```bash
-make deploy
+cd monitoring/prometheus && make deploy
+```
+Deploy Grafana
+
+```bash
+cd monitoring/grafana && make deploy
 ```
 
+Deploy Promtail
+
+```bash
+cd monitoring/promtail && make deploy
+```
+
+Deploy Loki
+
+```bash
+cd monitoring/loki && make deploy
+```
 
 ### Production ToDO
 - Automate the deployment of K8s Cluster and its resources (nginx, secret manager etc) with Kubernetes
