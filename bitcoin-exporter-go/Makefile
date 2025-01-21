@@ -11,10 +11,9 @@ CGO_ENABLED?= $(shell go env CGO_ENABLED)
 GO_ENV := GOOS=$(GOOS) GOARCH=$(GOARCH) GOARM=$(GOARM) CGO_ENABLED=$(CGO_ENABLED)
 
 
-.PHONY: build push deploy clean migrate validate bitcoin-exporter
+.PHONY: build push deploy clean validate build-bitcoin-exporter
 
-
-bitcoin-exporter:
+build-bitcoin-exporter:
 	$(GO_ENV) go build $(GO_FLAGS) -o ./cmd/bitcoin-exporter ./main.go
 
 build: validate
@@ -28,13 +27,7 @@ push: build
 
 clean:
 	docker system prune -f
-
-deploy: validate
-	cd ./k8s/${ENVIRONMENT} && kustomize build . | kubectl apply -f - -n ${NAMESPACE}
-
-delete: validate
-	cd ./k8s/${ENVIRONMENT} && kustomize build . | kubectl delete -f - -n ${NAMESPACE}
-
+	
 .PHONY: validate
 validate:
 ifeq (${ENVIRONMENT},)

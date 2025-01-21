@@ -5,12 +5,13 @@ metadata:
   namespace: bitcoin-node
 data:
   bitcoin.conf: |
-    testnet=1
+    testnet4=1
     printtoconsole=1
-    rpcbind=0.0.0.0
     rpcallowip=0.0.0.0/0
-    rpcport=8332
-    rpcuser=${BITCOIN_RPC_USER}
-    rpcpassword=${BITCOIN_RPC_PASSWORD}
+    rpcuser=$BITCOIN_RPC_USER
+    rpcpassword=$BITCOIN_RPC_PASSWORD
     prune=550
     server=1
+    [test]
+    rpcbind=0.0.0.0
+    rpcport=18332

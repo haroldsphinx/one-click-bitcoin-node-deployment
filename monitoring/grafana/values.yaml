@@ -10,16 +10,15 @@ global:
     type: NodePort
     port: 3000
   datasources:
-    - name: Prometheus
-      type: prometheus
-      url: http://prometheus.monitoring.svc.cluster.local:9090
-      access: proxy
-      isDefault: true
-  dashboards:
-    custom-dashboards:
-      file: dashboards/bitcoin-dashboards.json
-  grafana.ini:
-    server:
-      root_url: https://grafana.monitoring.svc.cluster.local
-    paths:
-      data: /var/lib/grafana/
+    enabled: true
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: prometheus-ds
+          type: prometheus
+          url: http://prometheus-server.monitoring.svc.cluster.local:80
+          access: proxy
+          isDefault: true
+          editable: true
+  
+

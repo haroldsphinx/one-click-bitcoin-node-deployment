@@ -21,13 +21,16 @@ spec:
           requests:
             memory: "4Gi"
             cpu: 2
-        command:
-          - /bin/bash
-          - -c
-          - |
-            bitcoind -conf
+        args: 
+          - -testnet=1
+          - -rpcbind=0.0.0.0
+          - -rpcallowip=0.0.0.0/0
+          - -rpcport=18332
+          - -rpcuser=$BITCOIN_RPC_USER
+          - -rpcpassword=$BITCOIN_RPC_PASSWORD
+          - -prune=1000
         ports:
-        - containerPort: 8332
+        - containerPort: 18332
           name: rpc
         - containerPort: 8333
           name: p2p
@@ -43,18 +46,16 @@ spec:
               name: bitcoin-node-secrets
               key: bitcoin_rpc_password
         volumeMounts:
-        - name: bitcoin-node-data-pvc
-          mountPath: /home/bitcoin/.bitcoin
+        - name: bitcoin-data
+          mountPath: /home/bitcoin/data
       volumes:
-      - name: bitcoin-node-data-pvc
-        persistentVolumeClaim:
-          claimName: bitcoin-node-data-pvc
+      - name: bitcoin-data
   volumeClaimTemplates:
   - metadata:
-      name: bitcoin-node-data-pvc
+      name: bitcoin-data
     spec:
       accessModes: ["ReadWriteOnce"]
-      storageClassName: "default"
+      storageClassName: hostpath # change to appropriate storage class for production
       resources:
         requests:
-          storage: 10Gi 
+          storage: 20Gi 

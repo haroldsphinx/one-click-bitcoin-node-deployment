@@ -10,18 +10,14 @@ install-dependencies:
 	helm repo add grafana https://grafana.github.io/helm-charts
 	helm repo update
 
-.PHONY: create-configmap
-create-configmap:
-	kubectl create configmap grafana-dashboards --from-file=./dashboards/ -n $(NAMESPACE)
-
 .PHONY: template
 template: validate install-dependencies
 	rm -rf ${BASE_DIR}/${RELEASE_NAME}
-	helm template -n ${NAMESPACE} ${RELEASE_NAME} $(CHART_NAME) --version $(VERSION) --output-dir=./base -f ./values.yaml -f ./$(ENVIRONMENT)/values.yaml
+	helm template -n ${NAMESPACE} ${RELEASE_NAME} $(CHART_NAME) --version $(VERSION) --output-dir=./base -f ./values.yaml
 
 .PHONY: create-configmap deploy
 deploy: validate install-dependencies
-	helm upgrade --install -n ${NAMESPACE} $(RELEASE_NAME) $(CHART_NAME) --version $(VERSION) -f ./values.yaml -f ./$(ENVIRONMENT)/values.yaml
+	helm upgrade --install -n ${NAMESPACE} $(RELEASE_NAME) $(CHART_NAME) --version $(VERSION) -f ./values.yaml 
 
 .PHONY: delete
 delete: install-dependencies

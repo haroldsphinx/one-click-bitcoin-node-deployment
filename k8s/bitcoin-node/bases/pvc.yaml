@@ -9,15 +9,15 @@ metadata:
 provisioner: docker.io/hostpath
 volumeBindingMode: Immediate
 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: bitcoin-node-data-pvc
-  namespace: bitcoin-node
-spec:
-  accessModes: ["ReadWriteOnce"]
-  storageClassName: "default" 
-  resources:
-    requests:
-      storage: 10Gi 
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: bitcoin-node-data-pvc
+#   namespace: bitcoin-node
+# spec:
+#   accessModes: ["ReadWriteOnce"]
+#   storageClassName: "default" 
+#   resources:
+#     requests:
+#       storage: 10Gi 

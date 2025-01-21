@@ -42,7 +42,7 @@ spec:
               name: bitcoin-node-exporter-secrets
               key: bitcoin_rpc_password
         - name: BITCOIN_RPC_URL
-          value: bitcoin-node-service.bitcoin-node.svc.cluster.local:8332
+          value: bitcoin-node-service.bitcoin-node.svc.cluster.local:18332
         readinessProbe:
           httpGet:
             path: /metrics

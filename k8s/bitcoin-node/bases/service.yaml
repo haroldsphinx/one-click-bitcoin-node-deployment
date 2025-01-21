@@ -8,7 +8,7 @@ metadata:
 spec:
   ports:
     - name: rpc
-      port: 8332
+      port: 18332
       targetPort: rpc
     - name: p2p
       port: 8333

@@ -39,7 +39,31 @@ make deploy
 ```
 
 ### 3. Creating a bitcoin-node exporter service in Golang
+- to build locally on any architecture, you can use the following command:
+```
+make build-bitcoin-node-exporter
+```
+to run and test locally
+```
 
+./cmd/bitcoin-exporter/bitcoin-exporter
+```
+
+- to build with docker
+```
+make build
+```
+
+- to deploy to local kubernetes cluster, ensure you have a namespace called bitcoin-node-exporter
+```
+make deploy
+```
+
+### 4. Setup Monitoring
+- Deploy Proemtheus
+```
+make deploy
+```
 
 # Things I will do differently in a production setup
 # Reference

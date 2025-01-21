@@ -8,7 +8,7 @@ resources:
   - statefulset.yaml
   - service.yaml
   - secrets.yaml
-  - pvc.yaml
+
   - configmap.yaml
 
 commonLabels:

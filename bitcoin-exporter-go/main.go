@@ -88,5 +88,5 @@ func updateMetrics(client *rpcclient.Client) {
 	} else {
 		numPeers.Set(float64(len(peerInfo)))
 	}
-
+	
 }
