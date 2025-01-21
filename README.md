@@ -77,6 +77,12 @@ Deploy Proemtheus
 make deploy
 ```
 
+Screenshot to show DoD
+
+![Bitcoin Node Synching](./screenshots/bitcoin_node_synching.png)
+![Grafana Dashboard](./screenshots/grafana_dashboard.png)
+![Prometheus Dashboard](./screenshots/prometheus_working.png)
+
 # References
 - https://github.com/bitcoin/bitcoin/blob/master/doc/bitcoin-conf.md
 - https://github.com/btcsuite/btcd/rpcclient
