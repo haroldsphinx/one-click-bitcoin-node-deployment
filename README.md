@@ -77,7 +77,17 @@ Deploy Proemtheus
 make deploy
 ```
 
-Screenshot to show DoD
+
+### Production ToDO
+- Automate the deployment of K8s Cluster and its resources (nginx, secret manager etc) with Kubernetes
+- Better Secret management with Hashicorp vault or Cloud KMS alongside integration with kubernetes secret operator
+- Add more imprtant metrics to the bitcoin node exporter
+- Use Grafana Cloud instead of Grafana OSS for Dashbaords and Alert Managemet
+- Portect and Gate proemtheus, grafama, loki, promtail with nginx ingress controller anf cloudflared
+
+
+
+#### Screenshot to show DoD
 
 ![Bitcoin Node Synching](./screenshots/bitcoin_node_synching.png)
 ![Grafana Dashboard](./screenshots/grafana_dashboard.png)
