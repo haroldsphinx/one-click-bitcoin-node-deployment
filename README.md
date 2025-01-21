@@ -94,6 +94,11 @@ Deploy Loki
 cd monitoring/loki && make deploy
 ```
 
+## For Once Click Deployment
+```bash
+make all
+```
+
 ### Production ToDO
 - Automate the deployment of K8s Cluster and its resources (nginx, secret manager etc) with Kubernetes
 - Better Secret management with Hashicorp vault or Cloud KMS alongside integration with kubernetes secret operator
