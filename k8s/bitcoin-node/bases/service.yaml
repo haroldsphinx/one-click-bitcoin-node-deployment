@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bitcoin-node-service
+  namespace: bitcoin-node
+  labels:
+    app: bitcoin-node
+spec:
+  ports:
+    - name: rpc
+      port: 8332
+      targetPort: rpc
+    - name: p2p
+      port: 8333
+      targetPort: p2p
+  selector:
+    app: bitcoin-node

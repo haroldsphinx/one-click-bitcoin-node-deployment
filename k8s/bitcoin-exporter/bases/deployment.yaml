@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bitcoin-node-exporter
+  namespace: bitcoin-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitcoin-node-exporter
+  template:
+    metadata:
+      labels:
+        app: bitcoin-node-exporter
+    spec:
+      containers:
+      - name: bitcoin-node-exporter
+        imagePullPolicy: Never
+        image: haroldsphinx/bitcoin-exporter-go:latest
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m" 
+          limits:
+            memory: "2Gi"
+            cpu: "1" 
+        ports:
+        - containerPort: 8335
+          name: metrics
+          protocol: TCP
+        env:
+        - name: APP_PORT
+          value: "8335"
+        - name: BITCOIN_RPC_USER
+          valueFrom:
+            secretKeyRef:
+              name: bitcoin-node-exporter-secrets
+              key: bitcoin_rpc_user
+        - name: BITCOIN_RPC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: bitcoin-node-exporter-secrets
+              key: bitcoin_rpc_password
+        - name: BITCOIN_RPC_URL
+          value: bitcoin-node-service.bitcoin-node.svc.cluster.local:8332
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 8335
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 8335
+          initialDelaySeconds: 15
+          periodSeconds: 20
+      restartPolicy: Always

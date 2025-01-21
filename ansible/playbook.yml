@@ -1,0 +1,10 @@
+---
+- name: Setup Minikube Cluster 
+  hosts: localhost
+  become: true 
+  roles:
+    - role: minikube
+      vars:
+        target_os: "macos"
+        minikube_version: "1.32.0"
+        minikube_install_path: "/usr/local/bin/minikube"

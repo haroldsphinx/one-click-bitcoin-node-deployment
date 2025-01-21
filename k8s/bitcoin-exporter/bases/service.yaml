@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bitcoin-node-exporter-service
+  namespace: bitcoin-node
+  labels:
+    app: bitcoin-node-exporter
+spec:
+  ports:
+    - name: metrics
+      port: 8335
+      targetPort: metrics
+  selector:
+    app: bitcoin-node-exporter

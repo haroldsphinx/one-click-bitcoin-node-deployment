@@ -1,0 +1,5 @@
+---
+- name: Start minikube
+  ansible.builtin.shell:
+    cmd: minikube start 
+  when: minikube_version.rc == 0

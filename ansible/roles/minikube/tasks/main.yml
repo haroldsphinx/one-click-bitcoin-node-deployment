@@ -1,0 +1,6 @@
+---
+- name: Install minikube
+  include_tasks: install.yml
+
+- name: Start Minikube
+  include_tasks: start-minikube.yml

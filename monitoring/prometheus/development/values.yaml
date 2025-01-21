@@ -1,0 +1,23 @@
+server:
+  global:
+    external_labels:
+      env: development
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 256Mi
+    requests:
+      cpu: 500m
+      memory: 256Mi
+  retention: 5m
+
+extraScrapeConfigs: |
+  - job_name: bitcoin-node-exporter
+    scrape_interval: 30s
+    scrape_timeout: 30s
+    metrics_path: /metrics
+    scheme: http
+    tls_config:
+      insecure_skip_verify: true
+    static_configs:
+      - targets: ["bitcoin-node-exporter-service.bitcoin-node.svc.cluster.local:8335"]

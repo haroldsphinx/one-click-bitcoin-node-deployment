@@ -1,0 +1,31 @@
+---
+# install minikube
+- name: Ensure  user specifies OS, # this determiens the installation repository
+  ansible.builtin.assert:
+    that:
+      - target_os in ['ubuntu', 'debian', 'macos']
+    fail_msg: "Invalid OS selection. Please choose one of: ubuntu, debian, macos."
+
+- name: Install dependencies for Ubuntu/Debian
+  ansible.builtin.shell:
+    cmd: |
+      curl -LO curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+      install minikube-linux-{{ system_arch }} {{ minikube_install_path }}
+    creates: "{{ minikube_install_path }}"
+  when: target_os in ['ubuntu', 'debian']
+
+- name: Install Minikube on macOS (Apple M1) 
+  ansible.builtin.shell:
+    cmd: |
+      curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-darwin-arm64
+      sudo install minikube-darwin-arm64 {{ minikube_install_path }}
+    creates: "{{ minikube_install_path }}"
+  when: target_os == "macos"
+
+- name: Verify Minikube installation
+  ansible.builtin.command:
+    cmd: minikube version
+  register: minikube_version
+  changed_when: false
+
+

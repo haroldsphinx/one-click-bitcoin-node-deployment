@@ -1,0 +1,25 @@
+global:
+  adminUser: admin
+  adminPassword: admin
+  persistence:
+    enabled: true
+    size: 10Gi
+    accessModes:
+      - ReadWriteOnce
+  service:
+    type: NodePort
+    port: 3000
+  datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus.monitoring.svc.cluster.local:9090
+      access: proxy
+      isDefault: true
+  dashboards:
+    custom-dashboards:
+      file: dashboards/bitcoin-dashboards.json
+  grafana.ini:
+    server:
+      root_url: https://grafana.monitoring.svc.cluster.local
+    paths:
+      data: /var/lib/grafana/

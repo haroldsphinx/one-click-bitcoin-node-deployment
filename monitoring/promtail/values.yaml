@@ -1,0 +1,27 @@
+config:
+  lokiAddress: http://loki.monitoring.svc.cluster.local:3100/api/prom/push
+  snippets:
+    extraClientConfigs: |
+      basic_auth:
+        username: adedayo
+        password_file: /run/secrets/bitcoin-node-exporter-secrets
+resources:
+  limits:
+    cpu: 1000m
+    memory: 256Mi
+  requests:
+    cpu: 500m
+    memory: 128Mi
+extraVolumes:
+  - name: monitoring-secrets
+    secret:
+      secretName: monitoring-secrets
+      items:
+        - key: prometheus_password
+          path: prometheus_password
+      defaultMode: 420
+      optional: false
+extraVolumeMounts:
+  - name: monitoring-secrets
+    mountPath: /run/secrets/monitoring-secrets
+    readOnly: true

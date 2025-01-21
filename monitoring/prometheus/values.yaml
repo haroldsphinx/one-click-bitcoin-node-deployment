@@ -1,0 +1,33 @@
+alertmanager:
+  enabled: false
+pushgateway:
+  enabled: false
+
+forceNamespace: monitoring
+
+server:
+  global:
+    scrape_interval: 15s
+  storagePath: ""
+  image:
+    tag: v2.38.0
+  resources:
+    limits:
+      cpu: 1
+      memory: 2Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+  persistentVolume:
+    size: 50Gi
+  retention: 2h
+  strategy:
+    type: Recreate
+
+serverFiles:
+  prometheus.yml:
+    scrape_configs:
+      - job_name: prometheus
+        static_configs:
+          - targets:
+              - localhost:9090

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bitcoin-node
+  namespace: bitcoin-node
+spec:
+  serviceName: bitcoin-node
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bitcoin-node
+  template:
+    metadata:
+      labels:
+        app: bitcoin-node
+    spec:
+      containers:
+      - name: bitcoin-node
+        image: bitcoin/bitcoin:latest
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: 2
+        command:
+          - /bin/bash
+          - -c
+          - |
+            bitcoind -conf
+        ports:
+        - containerPort: 8332
+          name: rpc
+        - containerPort: 8333
+          name: p2p
+        env:
+        - name: BITCOIN_RPC_USER
+          valueFrom:
+            secretKeyRef:
+              name: bitcoin-node-secrets
+              key: bitcoin_rpc_user
+        - name: BITCOIN_RPC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: bitcoin-node-secrets
+              key: bitcoin_rpc_password
+        volumeMounts:
+        - name: bitcoin-node-data-pvc
+          mountPath: /home/bitcoin/.bitcoin
+      volumes:
+      - name: bitcoin-node-data-pvc
+        persistentVolumeClaim:
+          claimName: bitcoin-node-data-pvc
+  volumeClaimTemplates:
+  - metadata:
+      name: bitcoin-node-data-pvc
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "default"
+      resources:
+        requests:
+          storage: 10Gi 
