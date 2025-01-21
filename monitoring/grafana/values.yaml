@@ -20,5 +20,11 @@ global:
           access: proxy
           isDefault: true
           editable: true
+        - name: loki-ds
+          type: loki
+          url: http://loki-server.monitoring.svc.cluster.local:3100
+          access: proxy
+          isDefault: true
+          editable: true
   
 
