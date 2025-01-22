@@ -21,14 +21,17 @@ spec:
           requests:
             memory: "4Gi"
             cpu: 2
-        args: 
-          - -testnet=1
-          - -rpcbind=0.0.0.0
-          - -rpcallowip=0.0.0.0/0
-          - -rpcport=18332
-          - -rpcuser=${BITCOIN_RPC_USER}
-          - -rpcpassword=${BITCOIN_RPC_PASSWORD}
-          - -prune=1000
+        command: 
+        - "/bin/bash"
+        - "-c"
+        - |
+          bitcoin-cli -testnet=1 \
+          -rpcbind=0.0.0.0 \
+          -rpcallowip=0.0.0.0/0 \
+          -rpcport=18332 \
+          -rpcuser=${BITCOIN_RPC_USER} \
+          -rpcpassword=${BITCOIN_RPC_PASSWORD} \
+          -prune=1000
         ports:
         - containerPort: 18332
           name: rpc
