@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: bitcoin-node-exporter
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         image: haroldsphinx/bitcoin-exporter-go:latest
         resources:
           requests:
