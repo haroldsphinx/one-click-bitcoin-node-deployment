@@ -20,7 +20,7 @@ all:
 	@echo "Starting minikube"
 	make start-minikube
 	@echo "Building bitcoin node exporter"
-	cd bitcoin-node-exporter && make build-bitcoin-node-exporter
+	cd bitcoin-exporter-go && make build-bitcoin-exporter
 	@echo "Deploying bitcoin node exporter"
 	cd k8s/bitcoin-exporter && make deploy
 	@echo "Deploying prometheus"
