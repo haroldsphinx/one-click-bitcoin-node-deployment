@@ -24,6 +24,12 @@ server:
   strategy:
     type: Recreate
 
+nodeExporter:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false
+
 serverFiles:
   prometheus.yml:
     scrape_configs:
