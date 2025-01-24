@@ -8,6 +8,8 @@ namespace: bitcoin-node
 resources:
   - ../bases
 
+patch:
+ - 
 
 commonLabels:
   environment: development

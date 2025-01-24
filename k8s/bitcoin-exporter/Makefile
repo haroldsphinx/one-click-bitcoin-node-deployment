@@ -1,5 +1,5 @@
 ENVIRONMENT ?= development
-NAMESPACE ?= bitcoin-node
+NAMESPACE ?= bitcoin-node-exporter
 
 
 .PHONY: deploy delete validate
