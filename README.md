@@ -11,26 +11,9 @@ A project to deploy and monitor a Bitcoin node on Kubernetes with automated setu
 - [Next Steps (Prod)](#production-considerations)
 - [References](#references)
 
-##  Setup Minikube
-There are two ways to setup minikube:
-
-#### Option 1: Using Ansible to setup minikube on ubuntu/macos
-```bash
-ansible-playbook -i ansible/inventories/inventory.yml ansible/playbook.yml
-```
-
-#### Option 2: Using Minikube CLI to setup minikube on ubuntu/macos
-```bash
-make setup-minikube-macos
-make start-minikube
-```
-
-> P.S: Since its a local kubernetes cluster, I didnt want to use any elaborate tools like terraform to automate the setup so I just decided to use something basic, however my approach will be different for a production usecase.
+## 1. Setup K8s Cluster
 
 ## 2. Deploying Bitcoin Node
-I kustomize to deploy the bitcoin node, you can find the kustomize files in the k8s/bitcoin-node directory.
-
-> The idea around this is for easy multi-environment deployment and to also avoid too many replicared k8s manifest files.
 
 #### Steps to Deploy
 1. set environemnt variable to testnet or mainnet
